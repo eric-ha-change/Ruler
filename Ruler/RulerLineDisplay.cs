@@ -16,7 +16,7 @@ namespace MiP.Ruler
 
         private readonly RulerLine[] _currentLineInArray = new RulerLine[1];
         private readonly List<RulerLine> _rulerLines = new List<RulerLine>();
-
+		public IReadOnlyList<RulerLine> RulerLines { get { return _rulerLines; } }
         public bool ShowPercentages { get; set; } = false;
 
         private RulerLine _currentLine;
@@ -34,7 +34,8 @@ namespace MiP.Ruler
 
         private void Initialize()
         {
-            _currentLineInArray[0] = _currentLine = new RulerLine(this, new Point(-100, -100));
+            _currentLine = new RulerLine(this, new Point(-100, -100), true);
+            _rulerLines.Add(_currentLine);
         }
         
         public Orientation Orientation
@@ -46,6 +47,9 @@ namespace MiP.Ruler
         public void AddNewRulerLine(Point position)
         {
             _rulerLines.Add(new RulerLine(this, position));
+
+            foreach (var line in _rulerLines)
+                line.RefreshText();
         }
 
         public void ClearRulerLines()
@@ -59,6 +63,8 @@ namespace MiP.Ruler
         public void SetCurrentVisible(bool visible)
         {
             _currentLine.SetVisible(visible);
+            foreach (var line in _rulerLines)
+                line.RefreshText();
         }
 
         public void RemoveLast()
@@ -69,12 +75,18 @@ namespace MiP.Ruler
         
         public void TogglePercentages()
         {
-            ShowPercentages = !ShowPercentages;
+            _config.ShowPercentages = !_config.ShowPercentages;
 
             foreach (var line in _rulerLines)
                 line.RefreshText();
+        }
 
-            _currentLine.RefreshText();
+        public void ToggleRelativeDisplay()
+        {
+            _config.RelativeDisplay = !_config.RelativeDisplay;
+
+            foreach (var line in _rulerLines)
+                line.RefreshText();
         }
 
         public void ParentSizeChanged()
@@ -85,7 +97,7 @@ namespace MiP.Ruler
 
         private void SizeChangedHandler(object sender, SizeChangedEventArgs e)
         {
-            foreach (var line in _rulerLines.Concat(_currentLineInArray))
+            foreach (var line in _rulerLines)
                 line.ParentResized();
         }
 
@@ -93,7 +105,7 @@ namespace MiP.Ruler
         {
             var position = e.GetPosition(this);
 
-            RefreshCurrentRulerLine(position);
+            RefreshCurrentRulerLine(position);            
         }
 
         private void DirectionChanged()
@@ -111,6 +123,9 @@ namespace MiP.Ruler
         {
             _currentLine.MoveLineTo(pos);
             _currentLine.ParentResized();
+
+            foreach (var line in _rulerLines)
+                line.RefreshText();
         }
         
         #region INotifyPropertyChanged

@@ -41,6 +41,7 @@
         <KeyBinding Key="V" Command="{Binding SwitchVerticalCommand}" />
         <KeyBinding Key="A" Modifiers="Alt" Command="{Binding ShowAboutWindowCommand}" />
         <KeyBinding Key="P" Command="{Binding TogglePercentageCommand}" />
+        <KeyBinding Key="R" Command="{Binding ToggleRelativeDisplayCommand}" />
     </Window.InputBindings>
 
     <Window.ContextMenu>
@@ -52,6 +53,9 @@
                       IsChecked="{Binding Config.ShowPercentages, Mode=OneWay}" />
             
             <MenuItem Header="Clear Lines" Command="{Binding ClearRulerLinesCommand}" />
+            <MenuItem Header="Monitor Dimension" Command="{Binding MonitorDimensionCommand}" />
+            <MenuItem Header="Show Millimeter" Command="{Binding TogglePixelLengthCommand}" IsCheckable="True" 
+                      IsChecked="{Binding Config.ShowMillimeter}" />
             <Separator />
             <MenuItem Header="About" Command="{Binding ShowAboutWindowCommand}" />
             <MenuItem Header="Quit" Command="{Binding CloseCommand}" />
@@ -62,16 +66,16 @@
         <Canvas Background="White" Margin="{Binding Config.Orientation, Converter={StaticResource _orientationMarginConverter}}" />
 
         <DockPanel LastChildFill="False" Margin="{Binding Config.Orientation, Converter={StaticResource _orientationMarginConverter}}" ClipToBounds="True">
-            <ruler:RulerTicksDisplay RulerPosition="Top" DockPanel.Dock="Top" Height="30"
+            <ruler:RulerTicksDisplay RulerPosition="Top" DockPanel.Dock="Top" Height="30" x:Name="ticksDisplayTop" 
                                      Visibility="{Binding Config.Orientation, Converter={StaticResource _horizontalVisibilityConverter}}" />
-            <ruler:RulerTicksDisplay RulerPosition="Bottom" DockPanel.Dock="Bottom" Height="15"
+            <ruler:RulerTicksDisplay RulerPosition="Bottom" DockPanel.Dock="Bottom" Height="15" x:Name="ticksDisplayBottom" 
                                      Visibility="{Binding Config.Orientation, Converter={StaticResource _horizontalVisibilityConverter}}" />
         </DockPanel>
 
         <DockPanel LastChildFill="False" Margin="{Binding Config.Orientation, Converter={StaticResource _orientationMarginConverter}}" ClipToBounds="True">
-            <ruler:RulerTicksDisplay RulerPosition="Left" DockPanel.Dock="Left" Width="30"
+            <ruler:RulerTicksDisplay RulerPosition="Left" DockPanel.Dock="Left" Width="30" x:Name="ticksDisplayLeft" 
                                      Visibility="{Binding Config.Orientation, Converter={StaticResource _verticalVisibilityConverter}}" />
-            <ruler:RulerTicksDisplay RulerPosition="Right" DockPanel.Dock="Right" Width="30"
+            <ruler:RulerTicksDisplay RulerPosition="Right" DockPanel.Dock="Right" Width="30" x:Name="ticksDisplayRight" 
                                      Visibility="{Binding Config.Orientation, Converter={StaticResource _verticalVisibilityConverter}}" />
         </DockPanel>
 

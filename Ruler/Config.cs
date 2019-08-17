@@ -20,6 +20,7 @@ namespace MiP.Ruler
         private double _windowTop = 100;
         private double _windowWidth= 600;
         private double _windowHeight = 75;
+        private bool _relativeDisplay;
 
         public static Config Instance { get; } = GetInstance();
 
@@ -126,7 +127,22 @@ namespace MiP.Ruler
             }
         }
 
+        public bool RelativeDisplay
+        {
+            get { return _relativeDisplay; }
+            set
+            {
+                if (value.Equals(_relativeDisplay)) return;
+                _relativeDisplay = value;
+                OnPropertyChanged();
+            }
+        }
+
         public double Opacity { get; set; } = 1.0;
+
+        public double MonitorDimension { get; set; } = 24;
+
+        public bool ShowMillimeter { get; set; } = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

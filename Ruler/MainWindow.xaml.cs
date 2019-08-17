@@ -7,6 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using MiP.Ruler.Annotations;
 using MiP.Ruler.Commands;
+using MiP.Ruler.Converters;
+using static MiP.Ruler.RulerTicksDisplay;
+using MIR.Ruler.Commands;
 
 namespace MiP.Ruler
 {
@@ -31,6 +34,8 @@ namespace MiP.Ruler
 
         public MainWindow()
         {
+            PixelToPpiConverter.SetPPI();
+
             InitializeComponent();
 
             InitializeSizingBoxes();
@@ -38,12 +43,17 @@ namespace MiP.Ruler
 
         public ICommand CloseCommand => new CloseCommand(this);
 
+        public ICommand MonitorDimensionCommand => new MonitorDimensionCommand(this);
+
+        public ICommand TogglePixelLengthCommand => new TogglePixelLengthCommand(this);
+
         public ICommand ClearRulerLinesCommand => new ClearRulerLinesCommand(this);
 
         public ICommand ToggleOrientationCommand => new SwitchOrientationCommand(this, true);
         public ICommand SwitchHorizontalCommand => new SwitchOrientationCommand(this, Orientation.Horizontal);
         public ICommand SwitchVerticalCommand => new SwitchOrientationCommand(this, Orientation.Vertical);
         public ICommand ShowAboutWindowCommand => new ShowAboutWindowCommand();
+        public ICommand ToggleRelativeDisplayCommand => new ToggleRelativeDisplayCommand(this);
 
         public ICommand TogglePercentageCommand => new TogglePercentageCommand(this);
 
@@ -59,6 +69,29 @@ namespace MiP.Ruler
         public void TogglePercentages()
         {
             _rulerLineDisplay.TogglePercentages();
+        }
+
+        public void ToggleRelativeDisplay()
+        {
+            _rulerLineDisplay.ToggleRelativeDisplay();
+        }
+
+        public void ClearRulerTicksDisplay()
+        {
+            ClearLines();
+            ticksDisplayTop.Children.Clear();
+            ticksDisplayBottom.Children.Clear();
+            ticksDisplayLeft.Children.Clear();
+            ticksDisplayRight.Children.Clear();
+        }
+
+        public void TogglePixelLength()
+        {
+            ClearRulerTicksDisplay();
+            ticksDisplayTop.LeftRuler_Loaded(this, null);
+            ticksDisplayBottom.LeftRuler_Loaded(this, null);
+            ticksDisplayLeft.LeftRuler_Loaded(this, null);
+            ticksDisplayRight.LeftRuler_Loaded(this, null);
         }
 
         private void MainWindow_OnInitialized(object sender, EventArgs e)
