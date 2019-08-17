@@ -97,7 +97,7 @@ namespace MiP.Ruler
             for (int position = 0; position < count; position++)
             {
                 var length = GetLength(position);
-
+                 
                 var tick = new Line
                 {
                     Stroke = Brushes.Black,
