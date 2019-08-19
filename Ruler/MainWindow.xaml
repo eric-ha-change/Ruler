@@ -51,7 +51,9 @@
             
             <MenuItem Header="Show percentages" Command="{Binding TogglePercentageCommand}" IsCheckable="True" 
                       IsChecked="{Binding Config.ShowPercentages, Mode=OneWay}" />
-            
+            <MenuItem Header="Relative values" Command="{Binding ToggleRelativeDisplayCommand}" IsCheckable="True"
+                      IsChecked="{Binding Config.RelativeDisplay, Mode=OneWay}" />
+
             <MenuItem Header="Clear Lines" Command="{Binding ClearRulerLinesCommand}" />
             <MenuItem Header="Monitor Dimension" Command="{Binding MonitorDimensionCommand}" />
             <MenuItem Header="Show Millimeter" Command="{Binding TogglePixelLengthCommand}" IsCheckable="True" 

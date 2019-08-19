@@ -70,6 +70,11 @@ namespace MiP.Ruler
         {
             _rulerLineDisplay.TogglePercentages();
         }
+        
+        public void ToggleRelativeDisplay()
+        {
+            _rulerLineDisplay.ToggleRelativeDisplay();
+        }
 
         public void ToggleRelativeDisplay()
         {
@@ -346,7 +351,7 @@ namespace MiP.Ruler
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+        
         private class SizingBox
         {
             public Cursor Cursor;
