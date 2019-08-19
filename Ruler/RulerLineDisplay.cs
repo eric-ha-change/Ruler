@@ -15,7 +15,7 @@ namespace MiP.Ruler
             nameof(Orientation), typeof(Orientation), typeof(RulerLineDisplay), new PropertyMetadata(Orientation.Horizontal, (o, args) => { ((RulerLineDisplay) o)?.DirectionChanged(); }));
 
         private readonly List<RulerLine> _rulerLines = new List<RulerLine>();
-        public IReadOnlyList<RulerLine> RulerLines { get => _rulerLines; }
+        public IReadOnlyList<RulerLine> RulerLines { get { return _rulerLines; } }
 
         private RulerLine _currentLine;
         private readonly Config _config;

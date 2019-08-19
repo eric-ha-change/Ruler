@@ -9,7 +9,7 @@ using MiP.Ruler.Annotations;
 using MiP.Ruler.Commands;
 using MiP.Ruler.Converters;
 using static MiP.Ruler.RulerTicksDisplay;
-using MIR.Ruler.Commands;
+using MiP.Ruler.Commands;
 
 namespace MiP.Ruler
 {
@@ -71,11 +71,6 @@ namespace MiP.Ruler
             _rulerLineDisplay.TogglePercentages();
         }
         
-        public void ToggleRelativeDisplay()
-        {
-            _rulerLineDisplay.ToggleRelativeDisplay();
-        }
-
         public void ToggleRelativeDisplay()
         {
             _rulerLineDisplay.ToggleRelativeDisplay();
