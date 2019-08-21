@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Input;
 
-namespace MIR.Ruler.Commands
+namespace MiP.Ruler.Commands
 {
     public class ToggleRelativeDisplayCommand : ICommand
     {

@@ -8,8 +8,6 @@ using System.Windows.Input;
 using MiP.Ruler.Annotations;
 using MiP.Ruler.Commands;
 using MiP.Ruler.Converters;
-using static MiP.Ruler.RulerTicksDisplay;
-using MIR.Ruler.Commands;
 
 namespace MiP.Ruler
 {
