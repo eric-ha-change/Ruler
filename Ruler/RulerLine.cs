@@ -160,7 +160,7 @@ namespace MiP.Ruler
                 else
                     Canvas.SetTop(_textBlock, position.Y + 2);
             }
-        }
+        }        
 
         private string Format(double position)
         {
@@ -187,6 +187,7 @@ namespace MiP.Ruler
                 return (position / divisor * 100).ToString("0.0") + "%";
 
             return position.ToString("0");
+
         }
     }
 }

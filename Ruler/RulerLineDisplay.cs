@@ -14,10 +14,8 @@ namespace MiP.Ruler
         public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(
             nameof(Orientation), typeof(Orientation), typeof(RulerLineDisplay), new PropertyMetadata(Orientation.Horizontal, (o, args) => { ((RulerLineDisplay) o)?.DirectionChanged(); }));
 
-        private readonly RulerLine[] _currentLineInArray = new RulerLine[1];
         private readonly List<RulerLine> _rulerLines = new List<RulerLine>();
-		public IReadOnlyList<RulerLine> RulerLines { get { return _rulerLines; } }
-        public bool ShowPercentages { get; set; } = false;
+        public IReadOnlyList<RulerLine> RulerLines { get { return _rulerLines; } }
 
         private RulerLine _currentLine;
         private readonly Config _config;
